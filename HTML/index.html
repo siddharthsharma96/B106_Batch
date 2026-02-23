@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learning HTML</title>
+    <!-- External css -->
+
+    <!-- internal Css -->
+    <style>
+      h1 {
+        /* color: green;
+        background-color: yellow; */
+      }
+    </style>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <!-- paired tag opening content closing tag -->
+    <!-- Type of headings -->
+    <!-- Block Level Tag -->
+    <h1 id="q">Content</h1>
+    <!-- <h1 class="a">Heading 1</h1> -->
+    <h1>Another heading</h1>
+    <p id="d">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa consectetur
+      maxime sed reprehenderit adipisci ea temporibus nostrum, qui repellat
+      pariatur, nihil eligendi recusandae deserunt amet asperiores veniam
+      doloribus eaque corrupti! Lorem ipsum dolor sit amet consectetur
+      adipisicing elit. At aspernatur aliquid, commodi possimus, iste hic
+      praesentium est velit itaque distinctio facilis. Ex odit asperiores
+      voluptatum officia deleniti magnam quis sint!
+    </p>
+    <div>
+      <p>Hello I am Inside P tag</p>
+      <section>
+        <p>Inside section tag</p>
+      </section>
+    </div>
+    <h2>Heading 2</h2>
+    <h3 id="b">Heading 3</h3>
+    <h4 class="a">Heading 4</h4>
+    <h5>Heading 5</h5>
+    <h6>Heading 6</h6>
+    <p>Paragraph</p>
+    <p class="a">Paragraph</p>
+    <!-- Inline level tag -->
+    <span>Span </span>
+    <span>Span </span>
+    <h2 id="f"></h2>
+    <!-- List Tags -->
+    <!-- Unordered list -->
+    <ul>
+      <li>Rahul</li>
+      <li>Siddharth</li>
+      <li>Adarsh</li>
+      <li>Satyam</li>
+    </ul>
+    <!-- Ordered List -->
+    <ol>
+      <li>Siddharth</li>
+      <li>Adarsh</li>
+      <li>Satyam</li>
+      <li>Rahul</li>
+    </ol>
+    <!-- Description List -->
+    <dl>
+      <dt>Description Term</dt>
+      <dd>Description Data is this thing that we are calling inside dt tag</dd>
+    </dl>
+    <!-- Table Tags -->
+    <table>
+      <thead>
+        <tr>
+          <th>S.no</th>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1.</td>
+          <td>Siddharth</td>
+          <td>Sid@gmail</td>
+        </tr>
+        <tr>
+          <td>2.</td>
+          <td>Rahul</td>
+          <td>rahul@gmail</td>
+        </tr>
+        <tr>
+          <td>3.</td>
+          <td>Adarsh</td>
+          <td>adarsh@gmail</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Form tags -->
+    <form action="">
+      <label>Name</label>
+      <!-- Unpaired tags -->
+      <input type="text" required />
+      <br />
+      <label>Email</label>
+      <input type="email" />
+      <br />
+
+      <label>Password</label>
+      <input type="password" />
+      <br />
+
+      <label>Age</label>
+      <input min="10" max="20" type="number" />
+      <br />
+
+      <!-- Radio Button -->
+      <label>Gender</label>
+      <input type="radio" name="gender" value="male" />Male
+      <input type="radio" name="gender" value="female" />Female
+      <br />
+      <!-- checkbox -->
+      <label>Skills</label>
+      <input type="checkbox" name="skills" value="HTML" />HTML
+      <input type="checkbox" name="skills" value="CSS" />CSS
+      <input type="checkbox" name="skills" value="JS" />JS
+
+      <!-- dropdown -->
+      <label>Courses</label>
+      <select name="course" id="">
+        <option value="">Select course</option>
+        <option value="html">HTML</option>
+        <option value="CSS">CSS</option>
+        <option value="js">JavaScript</option>
+      </select>
+      <!-- file Upload -->
+      <label for="">File Upload</label>
+      <input type="file" name="" id="" />
+      <button type="submit">Submit form</button>
+      <button type="reset">Reset</button>
+    </form>
+    <!-- media tags -->
+    <img src="https://codehubnexus.com/assets/logov2.pn" alt="asasa" />
+    <iframe
+      src="https://codehubnexus.com/"
+      width="700px"
+      height="700px"
+      frameborder="10px"
+    ></iframe>
+    <!-- Semantic tag -->
+    <header>Header</header>
+    <nav>Nav</nav>
+    <section>Section</section>
+    <article>Article</article>
+    <aside>Aside</aside>
+    <footer>Footer</footer>
+    <!-- Non semantic tag -->
+    <div>Div</div>
+    <span>Span</span>
+    <!-- Homework -->
+    <!-- 1. 10 paired tags -->
+    <!-- 2. 10 unpaired tags -->
+    <!-- 3. 10 block level tags -->
+    <!-- 4. 10 Inline level tags -->
+    <!-- 5. 10 semantic tags -->
+    <!-- 6. 10 non-semantic tags -->
+  </body>
+</html>
