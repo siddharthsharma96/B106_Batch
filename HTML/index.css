@@ -1,0 +1,76 @@
+/* 1. Universal Selector (*) */
+* {
+  /* color: yellow; */
+  padding: 0;
+  margin: 0;
+}
+#q {
+  border: 2px solid red;
+  display: inline;
+  /* padding: 100px; */
+  /* top right bottom left */
+  /* padding: 10px 20px 30px 40px; */
+  /* padding: 100px 300px; */
+  /* margin: 100px; */
+}
+span {
+  display: block;
+}
+
+body {
+  /* border: 2px solid red; */
+}
+/* Tag Selector */
+h2 {
+  /* color: red; */
+}
+
+/* 3. Class Selector . */
+.a {
+  color: yellow;
+  background-color: red;
+}
+
+/* 4. Id Selector # */
+#b {
+  color: blue;
+  background-color: green;
+}
+
+/* Group Selector , */
+.a,
+h5,
+span {
+  border: 2px solid purple;
+}
+
+/* descendant selector */
+div p {
+  /* color: red;
+  background-color: yellow; */
+}
+/* Child Selector > */
+div > p {
+  color: red;
+  background-color: greenyellow;
+}
+#aa {
+  color: red;
+}
+/* pseudo Class selctor : */
+li:nth-child(2) {
+  color: red;
+  font-size: 32px;
+}
+
+/* Pseudo Elements ::*/
+#f::before {
+  content: "Hello Added From CSS";
+}
+
+#d::first-letter {
+  font-size: 32px;
+}
+#d::first-line {
+  color: red;
+}

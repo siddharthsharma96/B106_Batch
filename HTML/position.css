@@ -1,0 +1,32 @@
+div {
+  border: 1px solid red;
+  width: 40vw;
+  height: 80vh;
+}
+div p {
+  background-color: yellow;
+  color: red;
+  font-size: 24px;
+}
+
+.static {
+  position: static;
+}
+
+.sticky {
+  position: sticky;
+  top: 10px;
+}
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+  right: -40px;
+  top: 0;
+}
+.fixed {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}
