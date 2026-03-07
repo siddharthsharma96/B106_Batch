@@ -12,6 +12,10 @@ let diceEl = document.querySelector(".dice");
 let btnNew = document.querySelector(".btn--new");
 let btnHold = document.querySelector(".btn--hold");
 let btnRoll = document.querySelector(".btn--roll");
+let a = document.querySelector("#a");
+console.log(a.textContent);
+console.log(a.innerHTML);
+console.log(a.innerText);
 
 // 2. declare few variables for internal working
 let mainScore1, mainScore2, currentScore, activePlayer, playing;
@@ -42,6 +46,7 @@ let changePlayer = () => {
   document.querySelector(`#current--${activePlayer}`).textContent = 0;
   currentScore = 0;
   activePlayer = activePlayer === 0 ? 1 : 0;
+
   player1.classList.toggle("player--active");
   player2.classList.toggle("player--active");
 };
