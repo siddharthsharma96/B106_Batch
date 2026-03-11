@@ -1,0 +1,12 @@
+.App {
+  text-align: center;
+}
+
+.a {
+  border: 2px solid red;
+  font-size: 28px;
+  font-weight: 700;
+  color: red;
+  margin: 40px;
+  padding: 20px;
+}
