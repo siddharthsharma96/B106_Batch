@@ -1,0 +1,40 @@
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Counter {
+  width: 30%;
+  border: 2px solid red;
+  background-color: yellow;
+  padding: 50px 0;
+}
+.btnContainer {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+p {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.btnContainer button {
+  color: white;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 5px 8px;
+  border: none;
+  font-size: 20px;
+}
+
+.btnContainer button:nth-child(1) {
+  background-color: green;
+}
+
+.btnContainer button:nth-child(2) {
+  background-color: red;
+}
