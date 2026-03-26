@@ -28,7 +28,7 @@ const routes = createBrowserRouter([
         element: <Search />,
       },
       {
-        path: "restaurant",
+        path: "/restaurant/:id",
         element: <Restaurant />,
       },
       {
