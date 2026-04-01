@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 function App() {
   const [restaurantData, setRestaurantData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,17 +23,53 @@ function App() {
     };
     fetchData();
   }, []);
-  console.log(restaurantData);
+  const addItem = (item) => {
+    const existingProduct = cartItems.findIndex((cartItem) => {
+      return cartItem.card.info.id == item.card.info.id;
+    });
+    if (existingProduct !== -1) {
+      const updateCart = [...cartItems];
+      updateCart[existingProduct].quantity += 1;
+      setCartItems(updateCart);
+    } else {
+      setCartItems([...cartItems, { ...item, quantity: 1 }]);
+    }
+  };
+
+  const removeItem = (item) => {
+    const existingProduct = cartItems.findIndex((cartItem) => {
+      return cartItem.card.info.id == item.card.info.id;
+    });
+    if (existingProduct !== -1) {
+      const updateCart = [...cartItems];
+      if (updateCart[existingProduct].quantity > 1) {
+        updateCart[existingProduct].quantity -= 1;
+      } else {
+        updateCart.splice(existingProduct, 1);
+      }
+
+      setCartItems(updateCart);
+    }
+  };
+
+  const clearCart = () => {
+    setCartItems([]);
+  };
 
   return (
     <div className="App">
-      <Header></Header>
+      <Header cartItems={cartItems}></Header>
       <Outlet
         context={{
           restaurantData,
           setRestaurantData,
           loading,
           setLoading,
+          cartItems,
+          setCartItems,
+          addItem,
+          removeItem,
+          clearCart,
         }}
       />
     </div>
