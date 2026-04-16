@@ -1,5 +1,7 @@
-// const fs = require("fs");
+const fs = require("fs");
 const http = require("http");
+const url = require("url");
+const replaceTemplate = require("./modules/replacetemplate");
 
 // blocking code
 // synchronous code
@@ -61,11 +63,39 @@ const http = require("http");
 // 4xx - 400-499 - client error
 // 5xx - 500-599 - server error
 
+const overviewPage = fs.readFileSync("./templates/overview.html", "utf-8");
+const productPage = fs.readFileSync("./templates/product.html", "utf-8");
+const productData = fs.readFileSync("./dev-data/index.json", "utf-8");
+const productCards = fs.readFileSync("./templates/productCard.html", "utf-8");
 // 1. Create a server
 // 1. Callback function
 // req,res - request and response
 const server = http.createServer((req, res) => {
-  res.end("My first node server created succefully");
+  const { query, pathname } = url.parse(req.url, true);
+  if (pathname === "/" || pathname === "/overview") {
+    res.writeHead(200, { "content-type": "text/html" });
+    const cardsHtml = JSON.parse(productData)
+      .map((el) => replaceTemplate(productCards, el))
+      .join("");
+
+    const output = overviewPage.replace("{%PRODUCT_CARDS%}", cardsHtml);
+    res.end(output);
+  } else if (pathname === "/product") {
+    console.log(query.id);
+
+    res.writeHead(200, { "content-type": "text/html" });
+    const product = JSON.parse(productData)[query.ID];
+    console.log(product);
+
+    const output = replaceTemplate(productPage, product);
+    res.end(output);
+  } else if (pathname === "/api") {
+    res.writeHead(200, { "content-type": "application/json" });
+
+    res.end(productData);
+  } else {
+    res.end("Please check your url ");
+  }
 });
 
 // 2. Start the server
