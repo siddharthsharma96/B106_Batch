@@ -105,6 +105,18 @@ const deleteRestaurant = (req, res) => {
   });
 };
 
+// routes
+// 1. Api Endpoint
+// 2. callback function with two parameter:req and res
+// app.get("/api/v1/restaurant", getAllRestaurants);
+
+// app.get("/api/v1/restaurant/:id", getRestaurant);
+
+// app.post("/api/v1/restaurant", createRestaurant);
+// app.patch("/api/v1/restaurant/:id", updateRestaurant);
+
+// app.delete("/api/v1/restaurant/:id", deleteRestaurant);
+
 const restaurnatRouter = express.Router();
 restaurnatRouter.route("/").get(getAllRestaurants).post(createRestaurant);
 restaurnatRouter
