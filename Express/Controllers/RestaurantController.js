@@ -1,29 +1,8 @@
-const express = require("express");
-const app = express();
 const fs = require("fs");
-app.use(express.json());
-
-// middleware
-// Callback function that has access to the request and response
-//  object and the next function in the application’s request-response cycle.
-//  The next function is a function in the Express router which, when invoked,
-// executes the middleware succeeding the current middleware.
-app.use((req, res, next) => {
-  const now = new Date();
-  req.requestTimeOfHit = now.toLocaleString();
-  next();
-});
 
 const restaurantData = JSON.parse(fs.readFileSync("./Restaurant.json"));
 
-// CRUD
-// C: Create :POST
-// R: Read :GET
-// U: Update: Put and Patch
-// D: delete : Delete
-
-// controllers
-const getAllRestaurants = (req, res) => {
+exports.getAllRestaurants = (req, res) => {
   res.status(200).json({
     status: "Success",
     length: restaurantData.length,
@@ -32,7 +11,7 @@ const getAllRestaurants = (req, res) => {
   });
 };
 
-const getRestaurant = (req, res) => {
+exports.getRestaurant = (req, res) => {
   const id = req.params.id;
   const restaurant = restaurantData.find((el) => el.id == id);
   if (!restaurant) {
@@ -49,7 +28,7 @@ const getRestaurant = (req, res) => {
   });
 };
 
-const createRestaurant = (req, res) => {
+exports.createRestaurant = (req, res) => {
   const newResturantID = restaurantData.length;
   const newRestaurant = Object.assign({ id: newResturantID }, req.body);
   restaurantData.push(newRestaurant);
@@ -71,7 +50,7 @@ const createRestaurant = (req, res) => {
   });
 };
 
-const updateRestaurant = (req, res) => {
+exports.updateRestaurant = (req, res) => {
   const id = req.params.id;
   const restaurant = restaurantData.find((r) => r.id == id);
   if (!restaurant) {
@@ -88,7 +67,7 @@ const updateRestaurant = (req, res) => {
   });
 };
 
-const deleteRestaurant = (req, res) => {
+exports.deleteRestaurant = (req, res) => {
   const id = req.params.id;
   const restaurant = restaurantData.find((r) => r.id == id);
   if (!restaurant) {
@@ -104,16 +83,3 @@ const deleteRestaurant = (req, res) => {
     msg: "Restaurant data Deleted successfully",
   });
 };
-
-const restaurnatRouter = express.Router();
-restaurnatRouter.route("/").get(getAllRestaurants).post(createRestaurant);
-restaurnatRouter
-  .route("/:id")
-  .get(getRestaurant)
-  .patch(updateRestaurant)
-  .delete(deleteRestaurant);
-
-app.use("/api/v1/restaurant", restaurnatRouter);
-app.listen(8000, () => {
-  console.log("Server started on port no 8000");
-});
