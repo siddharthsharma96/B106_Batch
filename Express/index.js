@@ -12,6 +12,5 @@ app.use((req, res, next) => {
 
 app.use("/api/v1/restaurant", restaurantRouter);
 app.use("/api/v1/menu", menuRouter);
-app.listen(8000, () => {
-  console.log("Server started on port no 8000");
-});
+
+module.exports = app;
