@@ -1,85 +1,124 @@
-const fs = require("fs");
+const Restaurants = require("./../Models/RestaurantModel");
 
-const restaurantData = JSON.parse(fs.readFileSync("./Restaurant.json"));
+exports.getAllRestaurants = async (req, res) => {
+  try {
+    const restaurants = await Restaurants.find();
 
-exports.getAllRestaurants = (req, res) => {
-  res.status(200).json({
-    status: "Success",
-    length: restaurantData.length,
-    timeOfHit: req.requestTimeOfHit,
-    data: restaurantData,
-  });
-};
-
-exports.getRestaurant = (req, res) => {
-  const id = req.params.id;
-  const restaurant = restaurantData.find((el) => el.id == id);
-  if (!restaurant) {
-    return res.status(404).json({
+    res.status(200).json({
+      status: "Success",
+      length: restaurants.length,
+      timeOfHit: req.requestTimeOfHit,
+      data: restaurants,
+    });
+  } catch (err) {
+    res.status(400).json({
       status: "Failed",
       timeOfHit: req.requestTimeOfHit,
-      message: "Restaurant data not found for the given id",
+      message: "Error occurred while fetching restaurants",
+      val: err,
     });
   }
-  res.status(200).json({
-    status: "Success",
-    timeOfHit: req.requestTimeOfHit,
-    data: restaurant,
-  });
 };
 
-exports.createRestaurant = (req, res) => {
-  const newResturantID = restaurantData.length;
-  const newRestaurant = Object.assign({ id: newResturantID }, req.body);
-  restaurantData.push(newRestaurant);
-  fs.writeFile("./Restaurant.json", JSON.stringify(restaurantData), (err) => {
-    if (err) {
-      res.status(400).json({
+exports.getRestaurant = async (req, res) => {
+  try {
+    const restaurant = await Restaurants.findById(req.params.id);
+
+    if (!restaurant) {
+      return res.status(404).json({
         status: "Failed",
         timeOfHit: req.requestTimeOfHit,
-        messgae: "Unable to add restaurant data",
-        err: err,
+        message: "Restaurant data not found for the given id",
       });
     }
+    res.status(200).json({
+      status: "Success",
+      timeOfHit: req.requestTimeOfHit,
+      data: restaurant,
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "Failed",
+      timeOfHit: req.requestTimeOfHit,
+      message: "Error occurred while fetching restaurant",
+      val: err.message,
+    });
+  }
+};
+
+exports.createRestaurant = async (req, res) => {
+  try {
+    const restaurant = await Restaurants.create(req.body);
+
     res.status(201).json({
       status: "Success",
       message: "Restaurant data added successfully",
       timeOfHit: req.requestTimeOfHit,
-      data: newRestaurant,
+      data: restaurant,
     });
-  });
-};
-
-exports.updateRestaurant = (req, res) => {
-  const id = req.params.id;
-  const restaurant = restaurantData.find((r) => r.id == id);
-  if (!restaurant) {
-    return res.status(404).json({
+  } catch (err) {
+    res.status(400).json({
       status: "Failed",
       timeOfHit: req.requestTimeOfHit,
-      msg: "Restaurant data not found for the given id",
+      message: "Error occurred while creating restaurant",
+      val: err.message,
     });
   }
-  res.status(200).json({
-    status: "Success",
-    timeOfHit: req.requestTimeOfHit,
-    msg: "Restaurant data updated successfully",
-  });
 };
 
-exports.deleteRestaurant = (req, res) => {
-  const id = req.params.id;
-  const restaurant = restaurantData.find((r) => r.id == id);
-  if (!restaurant) {
-    return res.status(404).json({
+exports.updateRestaurant = async (req, res) => {
+  try {
+    const updateRestaurant = await Restaurants.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true },
+    );
+    if (!updateRestaurant) {
+      return res.status(404).json({
+        status: "Failed",
+        timeOfHit: req.requestTimeOfHit,
+        msg: "Restaurant data not found for the given id",
+      });
+    }
+    res.status(201).json({
+      status: "Success",
+      timeOfHit: req.requestTimeOfHit,
+      msg: "Restaurant data updated successfully",
+      data: updateRestaurant,
+    });
+  } catch (err) {
+    res.status(400).json({
       status: "Failed",
       timeOfHit: req.requestTimeOfHit,
-      msg: "Restaurant data not found for the given id",
+      message: "Error occurred while updating restaurant",
+      val: err.message,
     });
   }
-  res.status(204).json({
-    status: "Success",
-    timeOfHit: req.requestTimeOfHit,
-    msg: "Restaurant data Deleted successfully",
-  });
+};
+
+exports.deleteRestaurant = async (req, res) => {
+  try {
+    const deletedRestaurant = await Restaurants.findByIdAndDelete(
+      req.params.id,
+    );
+    if (!deletedRestaurant) {
+      return res.status(404).json({
+        status: "Failed",
+        timeOfHit: req.requestTimeOfHit,
+        msg: "Restaurant data not found for the given id",
+      });
+    }
+    res.status(204).json({
+      status: "Success",
+      timeOfHit: req.requestTimeOfHit,
+      msg: "Restaurant data Deleted successfully",
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "Failed",
+      timeOfHit: req.requestTimeOfHit,
+      message: "Error occurred while deleting restaurant",
+      val: err.message,
+    });
+  }
 };

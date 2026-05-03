@@ -2,10 +2,10 @@ const app = require("./index");
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.config.env" });
 const mongoose = require("mongoose");
-console.log(process.env.DB_NAME);
+// console.log(process.env.DB_NAME, DB_NAME=mongodb+srv://siduser:0123456789@cluster0.r738axx.mongodb.net/);
 
 mongoose
-  .connect("mongodb+srv://siduser:0123456789@cluster0.r738axx.mongodb.net/")
+  .connect(process.env.DB_URL)
   .then(() => {
     console.log("DB Connection Successful");
   })
